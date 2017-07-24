@@ -7,6 +7,20 @@
     <script src="../../headtracker.js"></script>
   </head>
   <body>
+    <canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
+    <video id="inputVideo" autoplay loop></video>
+    <script type="text/javascript">
+      var videoInput = document.getElementById('inputVideo');
+      var canvasInput = document.getElementById('inputCanvas');
+
+      var htracker = new headtrackr.Tracker();
+      htracker.init(videoInput, canvasInput);
+      htracker.start();
+
+      document.addEventListener('facetrackingEvent', function(event){
+        console.log(event.x, event.y)
+      })
+    </script>
     <!-- <a-scene>
       <a-assets>
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
@@ -20,16 +34,6 @@
       <a-light type="point" intensity="2" position="2 4 4"></a-light>
       <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
     </a-scene> -->
-    <canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
-    <video id="inputVideo" autoplay loop></video>
-    <script type="text/javascript">
-      var videoInput = document.getElementById('inputVideo');
-      var canvasInput = document.getElementById('inputCanvas');
-
-      var htracker = new headtrackr.Tracker();
-      htracker.init(videoInput, canvasInput);
-      htracker.start();
-    </script>
 
     <!-- GitHub Corner. -->
     <a href="https://github.com/jsimonson2013/aframe-head-tracker-controls-component" class="github-corner">
