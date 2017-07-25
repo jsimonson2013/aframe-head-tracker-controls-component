@@ -16,18 +16,13 @@
       var htracker = new headtrackr.Tracker();
       htracker.init(videoInput, canvasInput);
       htracker.start();
-
-      document.addEventListener('facetrackingEvent', function(event){
-        console.log(event.x, event.y)
-      })
     </script>
-    <a-scene>
+    <a-scene head-tracker-controls>
       <a-assets>
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
       </a-assets>
-
-      <a-entity head-tracker-controls=""></a-entity>
+      <a-camera></a-camera>
 
       <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
       <a-light type="ambient" color="#445451"></a-light>
