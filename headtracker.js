@@ -216,6 +216,7 @@ headtrackr.Tracker = function(params) {
 	}
 
 	var track = function() {
+    videoElement.setAttribute('style', 'z-index: 9999999; position: absolute;');
 		// Copy video to canvas
 		canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
 
