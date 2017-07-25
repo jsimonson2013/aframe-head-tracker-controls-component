@@ -3,7 +3,7 @@
 [![Version](http://img.shields.io/npm/v/aframe-head-tracker-controls-component.svg?style=flat-square)](https://npmjs.org/package/aframe-head-tracker-controls-component)
 [![License](http://img.shields.io/npm/l/aframe-head-tracker-controls-component.svg?style=flat-square)](https://npmjs.org/package/aframe-head-tracker-controls-component)
 
-A Head Tracker Controls component for A-Frame.
+A Head-Coupled perspective for A-Frame that utilizes [headtrackr](https://github.com/auduno/headtrackr). By using computer vision with the user's desktop webcam, headtrackr obtains position and rotation parameters about the user's head - their perspective. The `a-camera` can be updated in response to changing perspective to give a sense of 3 dimensions using the desktop screen.
 
 For [A-Frame](https://aframe.io).
 
