@@ -23,8 +23,8 @@ AFRAME.registerComponent('head-tracker-controls', {
   handleHeadMovement: function(event) {
     var camera = document.querySelector('a-camera')
 
-    camera.setAttribute('position', 'x', -0.1*event.x)
-    camera.setAttribute('position', 'y', 1.6 + 0.1*event.y)
+    camera.setAttribute('position', 'x', 0.3*event.x)
+    camera.setAttribute('position', 'y', 1.6 + 0.3*event.y)
   },
 
   /**

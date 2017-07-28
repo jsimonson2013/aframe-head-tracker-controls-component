@@ -22,8 +22,10 @@
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
       </a-assets>
-      <a-camera></a-camera>
-
+      <a-camera height="1.6"></a-camera>
+      <a-box position="0 1.75 -2" color="white" width="5" height=".5"></a-box>
+      <a-box position="-2.5 1 -2" color="white" width=".5" height="2"></a-box>
+      <a-box position="2.5 1 -2" color="white" width=".5" height="2"></a-box>
       <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
       <a-light type="ambient" color="#445451"></a-light>
       <a-light type="point" intensity="2" position="2 4 4"></a-light>
