@@ -8,7 +8,14 @@ if (typeof AFRAME === 'undefined') {
  * Head Tracker Controls component for A-Frame.
  */
 AFRAME.registerComponent('head-tracker-controls', {
-  schema: {},
+  schema: {
+    'xShift': {default: 0.0},
+    'yShift': {default: 1.6},
+    'zShift': {default: 0.0},
+    'xScale': {default: 0.3},
+    'yScale': {default: 0.3},
+    'zScale': {default: 0.1},
+  },
 
   /**
    * Set if component needs multiple instancing.
@@ -18,13 +25,22 @@ AFRAME.registerComponent('head-tracker-controls', {
   /**
    * Called once when component is attached. Generally for initial setup.
    */
-  init: function () { },
+  init: function () {
+    var camera = document.querySelector('a-camera');
 
-  handleHeadMovement: function(event) {
-    var camera = document.querySelector('a-camera')
+    var xShift = this.data.xShift;
+    var yShift = this.data.yShift;
+    var zShift = this.data.zShift;
 
-    camera.setAttribute('position', 'x', 0.3*event.x)
-    camera.setAttribute('position', 'y', 1.6 + 0.3*event.y)
+    var xScale = this.data.xScale;
+    var yScale = this.data.yScale;
+    var zScale = this.data.zScale;
+
+    handleHeadMovement = (event) => {
+      camera.setAttribute('position', 'x',xShift + xScale*event.x);
+      camera.setAttribute('position', 'y', yShift + yScale*event.y);
+      camera.setAttribute('position', 'z', zShift + zScale*event.z);
+    }
   },
 
   /**
@@ -37,7 +53,9 @@ AFRAME.registerComponent('head-tracker-controls', {
    * Called when a component is removed (e.g., via removeAttribute).
    * Generally undoes all modifications to the entity.
    */
-  remove: function () { },
+  remove: function () {
+    document.removeEventListener('headtrackingEvent', handleHeadMovement)
+  },
 
   /**
    * Called on each scene tick.
@@ -49,7 +67,7 @@ AFRAME.registerComponent('head-tracker-controls', {
    * Use to stop or remove any dynamic or background behavior such as events.
    */
   pause: function () {
-    document.removeEventListener('headtrackingEvent', this.handleHeadMovement)
+    document.removeEventListener('headtrackingEvent', handleHeadMovement)
   },
 
   /**
@@ -57,6 +75,6 @@ AFRAME.registerComponent('head-tracker-controls', {
    * Use to continue or add any dynamic or background behavior such as events.
    */
   play: function () {
-    document.addEventListener('headtrackingEvent', this.handleHeadMovement)
+    document.addEventListener('headtrackingEvent', handleHeadMovement)
   }
 });
