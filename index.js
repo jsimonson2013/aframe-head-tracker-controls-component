@@ -15,9 +15,9 @@ AFRAME.registerComponent('head-tracker-controls', {
     'xScale': {default: 0.3},
     'yScale': {default: 0.3},
     'zScale': {default: 0.1},
-    'width': {default: 99999},
-    'height': {default: 99999},
-    'depth': {default: 99999}
+    'width': {default: 99999.9},
+    'height': {default: 99999.9},
+    'depth': {default: 99999.9}
   },
 
   /**
@@ -43,17 +43,64 @@ AFRAME.registerComponent('head-tracker-controls', {
     var height = this.data.height;
     var depth = this.data.depth;
 
-    handleHeadMovement = (event) => {
-      if (camera.getAttribute('position', 'x') > xShift + width/2 ||
-          camera.getAttribute('position', 'y') > yShift + height/2 ||
-          camera.getAttribute('position', 'z') > zShift + depth/2 ||
-          camera.getAttribute('position', 'x') < xShift - width/2 ||
-          camera.getAttribute('position', 'y') < yShift - height/2 ||
-          camera.getAttribute('position', 'z') < zShift - depth/2)
+    var rebound = 0.01
 
-      camera.setAttribute('position', 'x',xShift + xScale*event.x);
-      camera.setAttribute('position', 'y', yShift + yScale*event.y);
-      camera.setAttribute('position', 'z', zShift + zScale*event.z);
+    handleHeadMovement = (event) => {
+      var position = camera.getAttribute('position');
+
+      if(position.x < xShift + width/2 && position.y < yShift + height/2 &&
+        position.z < zShift + depth/2 && position.x > xShift - width/2 &&
+        position.y > yShift - height/2 && position.z > zShift - depth/2) {
+
+        camera.setAttribute('position', {
+            'x': xShift + xScale*event.x,
+            'y': yShift + yScale*event.y,
+            'z': zShift + zScale*event.z
+        });
+      }
+
+      if (position.x > xShift + width/2) {
+        camera.setAttribute('position', {
+          'x': xShift + width/2 - rebound,
+          'y': yShift + yScale*event.y,
+          'z': zShift + zScale*event.z
+        });
+      }
+      else if (position.x < xShift - width/2) {
+        camera.setAttribute('position', {
+          'x': xShift - width/2 + rebound,
+          'y': yShift + yScale*event.y,
+          'z': zShift + zScale*event.z
+        });
+      }
+      if (position.y > yShift + height/2) {
+        camera.setAttribute('position', {
+          'x': xShift + xScale*event.x,
+          'y': yShift + height/2 - rebound,
+          'z': zShift + zScale*event.z
+        });
+      }
+      else if (position.y < yShift - height/2) {
+        camera.setAttribute('position', {
+          'x': xShift + xScale*event.x,
+          'y': yShift + height/2 + rebound,
+          'z': zShift + zScale*event.z
+        });
+      }
+      if (position.z > zShift + depth/2) {
+        camera.setAttribute('position', {
+          'x': xShift + xScale*event.x,
+          'y': yShift + yScale*event.y,
+          'z': zShift + depth/2 - rebound
+        });
+      }
+      else if (position.z < zShift - depth/2) {
+        camera.setAttribute('position', {
+          'x': xShift + xScale*event.x,
+          'y': yShift + yScale*event.y,
+          'z': zShift - depth/2 + rebound
+        });
+      }
     }
   },
 

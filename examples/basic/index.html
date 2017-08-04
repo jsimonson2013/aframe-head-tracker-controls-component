@@ -17,7 +17,8 @@
       htracker.init(videoInput, canvasInput);
       htracker.start();
     </script>
-    <a-scene head-tracker-controls="xScale: 0.3; yScale: 0.3; zScale: 0.1; xShift: 0.0; yShift: 1.6; zShift: 0.0;">
+    <a-scene>
+      <a-entity head-tracker-controls="xScale: 0.3; yScale: 0.3; zScale: 0.1; xShift: 0.0; yShift: 1.6; zShift: 0.0; width: 15.0; height: 15.0; depth: 15.0;"></a-entity>
       <a-assets>
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
